@@ -262,6 +262,11 @@
   <ItemGroup>
     <Xml Include="App\example\test.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AddWordScene.h" />
+    <ClInclude Include="SceneBase.h" />
+    <ClInclude Include="SearchScene.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

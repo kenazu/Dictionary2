@@ -232,4 +232,15 @@
       <Filter>Resource Files\example</Filter>
     </Xml>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SceneBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddWordScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
