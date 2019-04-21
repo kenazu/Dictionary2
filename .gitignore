@@ -1,0 +1,18 @@
+#OpenSiv3D用gitignore
+#version=OpenSiv3D(0.3.2)
+
+
+#Visual Studio 2019
+.vs/
+
+#Build results
+Intermediate/
+
+
+*.exe
+*.html
+
+#OpenSiv3D
+example/
+engine/
+nlp/
