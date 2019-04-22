@@ -2,9 +2,12 @@
 # include <Siv3D.hpp>
 # include <HamFramework.hpp>
 
+# include "Dictionary.h"
+
 namespace GameInfo
 {
-	const String FirstScene = U"SearchScene";
+	//const String FirstScene = U"SearchScene";
+	const String FirstScene = U"Test";
 }
 
 struct GameData
@@ -27,6 +30,43 @@ public:
 
 };
 
+class Test :public MyApp::Scene
+{
+	Dictionary dictionary;
+
+	Array<WordPair> datas;
+
+public:
+
+	Test(const InitData& _init) :IScene(_init) 
+	{
+		dictionary = Dictionary(U"test.csv");
+		dictionary.sortLowerEnglish();
+		datas = dictionary.getDatas();
+	}
+
+	void update()override
+	{
+		if (KeySpace.down())
+		{
+			datas = dictionary.search(U"");
+		}
+		if (KeyS.down())
+		{
+			datas = dictionary.search(U"a");
+		}
+	}
+
+	void draw()const override
+	{
+		ClearPrint();
+
+		for (const auto& data : datas)
+		{
+			Print << U"[" << data.first << U"," << data.second << U"]";
+		}
+	}
+};
 
 /*
 # include "SceneBase.h"

@@ -264,6 +264,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddWordScene.h" />
+    <ClInclude Include="Dictionary.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="SearchScene.h" />
   </ItemGroup>
