@@ -134,7 +134,7 @@ public:
 
 		if (m_isGrabbed && m_rangeBegin != m_rangeEnd)
 		{
-			m_knob.setCenter(m_knob.center().x, Cursor::Pos().y);
+			m_knob.setCenter(static_cast<int>(m_knob.center().x), Cursor::Pos().y);
 
 			//ƒmƒu‚ªƒo[‚Ì”ÍˆÍ“à‚Éû‚Ü‚é‚æ‚¤‚ÉC³‚·‚é
 			m_knob.pos.y = Clamp(m_knob.pos.y, getKnobYRange().first, getKnobYRange().second);

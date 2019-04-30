@@ -3,6 +3,8 @@
 # include <HamFramework.hpp>
 
 # include "Dictionary.h"
+# include "ScrollBar.h"
+# include "InputWord.h"
 
 namespace GameInfo
 {
@@ -32,39 +34,40 @@ public:
 
 class Test :public MyApp::Scene
 {
-	Dictionary dictionary;
 
-	Array<WordPair> datas;
+	InputWord input;
 
 public:
 
 	Test(const InitData& _init) :IScene(_init) 
 	{
-		dictionary = Dictionary(U"test.csv");
-		dictionary.sortLowerEnglish();
-		datas = dictionary.getDatas();
+		FontAsset::Register(U"font", 40);
+		input = InputWord(U"font", Size(300, 50));
+
 	}
 
 	void update()override
 	{
-		if (KeySpace.down())
+		input.update();
+
+		if (KeySpace.pressed())
 		{
-			datas = dictionary.search(U"");
+			input.setEnabled(false);
 		}
-		if (KeyS.down())
+		else
 		{
-			datas = dictionary.search(U"a");
+			input.setEnabled(true);
 		}
 	}
 
 	void draw()const override
 	{
 		ClearPrint();
+		Print << U"hasChaged:" << input.hasChanged();
+		Print << U"isEmpty:" << input.isEmpty();
+		Print << U"isEnabled:" << input.isEnabled();
 
-		for (const auto& data : datas)
-		{
-			Print << U"[" << data.first << U"," << data.second << U"]";
-		}
+		input.draw(50, 50);
 	}
 };
 

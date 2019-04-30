@@ -5,6 +5,8 @@
 
 void Main()
 {
+	Graphics::SetBackground(Palette::White);
+
 	MyApp manager;
 	manager.add<Empty>(U"Empty");
 	manager.add<SearchScene>(U"SearchScene");
