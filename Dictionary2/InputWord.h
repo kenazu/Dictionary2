@@ -9,12 +9,12 @@ class InputWord
 	String m_fontName;
 
 	Size m_size;
-	bool m_hasChanged;
+	bool m_hasChanged = false;
 
 	KeyConjunction m_pasteKey;
 	KeyConjunction m_deleteKey;
 
-	bool m_isEnabled;
+	bool m_isEnabled = false;
 
 public:
 

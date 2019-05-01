@@ -10,13 +10,13 @@ class ScrollBar
 	Rect m_knob;
 
 	//valueの範囲
-	int m_rangeBegin;
-	int m_rangeEnd;
+	int m_rangeBegin = 0;
+	int m_rangeEnd = 0;
 
 	//バーの位置から求めた値(rangeの範囲の値)
-	int m_value;
+	int m_value = 0;
 
-	bool m_isGrabbed;
+	bool m_isGrabbed = false;
 
 	
 

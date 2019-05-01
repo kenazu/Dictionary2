@@ -251,5 +251,8 @@
     <ClInclude Include="InputWord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="KeyScroller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

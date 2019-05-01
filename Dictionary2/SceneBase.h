@@ -1,10 +1,11 @@
 #pragma once
-# include <Siv3D.hpp>
+# include <Siv3D.hpp>// OpenSiv3D v0.3.2
 # include <HamFramework.hpp>
 
 # include "Dictionary.h"
 # include "ScrollBar.h"
 # include "InputWord.h"
+# include "KeyScroller.h"
 
 namespace GameInfo
 {
@@ -35,39 +36,27 @@ public:
 class Test :public MyApp::Scene
 {
 
-	InputWord input;
+	KeyScroller scroller;
+	int count = 0;
 
 public:
 
 	Test(const InitData& _init) :IScene(_init) 
 	{
-		FontAsset::Register(U"font", 40);
-		input = InputWord(U"font", Size(300, 50));
-
+		scroller = KeyScroller(KeyDown, KeyUp);
 	}
 
 	void update()override
 	{
-		input.update();
+		scroller.update();
+		count += scroller.getKeyMove();
 
-		if (KeySpace.pressed())
-		{
-			input.setEnabled(false);
-		}
-		else
-		{
-			input.setEnabled(true);
-		}
 	}
 
 	void draw()const override
 	{
 		ClearPrint();
-		Print << U"hasChaged:" << input.hasChanged();
-		Print << U"isEmpty:" << input.isEmpty();
-		Print << U"isEnabled:" << input.isEnabled();
-
-		input.draw(50, 50);
+		Print << count;
 	}
 };
 
