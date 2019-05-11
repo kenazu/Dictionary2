@@ -11,7 +11,7 @@ void Main()
 	Window::Resize(640, 480);
 
 	FontAsset::Register(U"wordFont", 35);
-	FontAsset::Register(U"tableNumFont", 20);
+	FontAsset::Register(U"tableNumFont", 15);
 	FontAsset::Register(U"tableFont", 20);
 
 	MyApp manager;

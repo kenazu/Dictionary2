@@ -7,24 +7,44 @@
 # include "InputWord.h"
 # include "KeyScroller.h"
 
-namespace GameInfo
+namespace SceneInfo
 {
 	const String FirstScene = U"SearchScene";
 	//const String FirstScene = U"Test";
 }
 
-struct GameData
+struct SceneData
 {
+	Array<String> sceneNames = { U"SearchScene",U"AddWordScene" };
+	int sceneIdx = 0;
 
+	void changeIdx(int _move)
+	{
+		sceneIdx += _move;
+
+		if (sceneIdx < 0)
+		{
+			sceneIdx = sceneNames.size() - 1;
+		}
+		else if (sceneIdx > sceneNames.size() - 1)
+		{
+			sceneIdx = 0;
+		}
+	}
+
+	String getSceneName()const
+	{
+		return sceneNames[sceneIdx];
+	}
 };
 
-using MyApp = SceneManager<String, GameData>;
+using MyApp = SceneManager<String, SceneData>;
 
 class Empty :public MyApp::Scene
 {
 	void updateFadeIn(double)override
 	{
-		changeScene(GameInfo::FirstScene, 0);
+		changeScene(getData().getSceneName(), 0);
 	}
 
 public:
@@ -33,9 +53,55 @@ public:
 
 };
 
+class ScrollScene :public MyApp::Scene
+{
+	KeyConjunction m_scrollLeftKey = KeyConjunction(KeyControl, KeyLeft);
+	KeyConjunction m_scrollRightKey = KeyConjunction(KeyControl, KeyRight);
+	
+
+protected:
+
+	bool downScrollLeftKey()const
+	{
+		return m_scrollLeftKey.down();
+	}
+
+	bool downScrollRightKey()const
+	{
+		return m_scrollRightKey.down();
+	}
+
+	bool scrollLeft()
+	{
+		getData().changeIdx(-1);
+		return changeScene(getData().getSceneName(), 500);
+	}
+
+	bool scrollRight()
+	{
+		getData().changeIdx(-1);
+		return changeScene(getData().getSceneName(), 500);
+	}
+
+	void updateScrollScene()
+	{
+		if (downScrollLeftKey())
+		{
+			scrollLeft();
+		}
+		else if (downScrollRightKey())
+		{
+			scrollRight();
+		}
+	}
+
+public:
+
+	ScrollScene(const InitData& _init) :IScene(_init) {}
+};
+
 class Test :public MyApp::Scene
 {
-
 	KeyScroller scroller;
 	int count = 0;
 

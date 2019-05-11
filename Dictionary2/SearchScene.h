@@ -6,7 +6,7 @@
 # include "Table.h"
 # include "ScrollBar.h"
 
-class SearchScene :public MyApp::Scene
+class SearchScene :public ScrollScene
 {
 	InputWord m_inputWord;
 	KeyScroller m_keyScroller;
@@ -18,10 +18,6 @@ class SearchScene :public MyApp::Scene
 
 	int m_initIdx = 0;
 	Array<WordPair> m_searchResult;
-
-	KeyConjunction m_scrollRightKey = KeyConjunction(KeyControl, KeyRight);
-	KeyConjunction m_scrollLeftKey = KeyConjunction(KeyControl, KeyLeft);
-
 
 	void setSearchResult(const Array<WordPair>& _result)
 	{
@@ -46,12 +42,15 @@ class SearchScene :public MyApp::Scene
 	{
 		const int move = m_keyScroller.getKeyMove() + static_cast<int>(Mouse::Wheel());
 
+		//キー入力があるときは開始インデックスの値を入力分増減する
+		//スクロールバーの位置をm_initIdxに応じて変更する
 		if (move != 0)
 		{
 			m_initIdx += move;
 			m_initIdx = Clamp<int>(m_initIdx, 0, m_searchResult.size() - 1);
 			m_scrollBar.setValue(m_initIdx);
 		}
+		//キー入力がないときは開始インデックスの値をスクロールバーの位置にする
 		else
 		{
 			m_initIdx = Clamp<int>(m_scrollBar.getValue(), 0, m_searchResult.size() - 1);
@@ -78,7 +77,7 @@ class SearchScene :public MyApp::Scene
 
 public:
 
-	SearchScene(const InitData& _init) :IScene(_init)
+	SearchScene(const InitData& _init) :ScrollScene(_init)
 	{
 		m_inputWord = InputWord(U"wordFont", Size(300, 50));
 		m_keyScroller = KeyScroller(KeyDown, KeyUp);
@@ -106,10 +105,7 @@ public:
 			search();
 		}
 
-		if (m_scrollLeftKey.down() || m_scrollRightKey.down())
-		{
-			changeScene(U"AddWordScene", 500);
-		}
+		updateScrollScene();
 	}
 
 	void draw()const override
