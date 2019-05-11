@@ -265,11 +265,12 @@
   <ItemGroup>
     <ClInclude Include="AddWordScene.h" />
     <ClInclude Include="Dictionary.h" />
+    <ClInclude Include="SearchScene.h" />
     <ClInclude Include="InputWord.h" />
     <ClInclude Include="KeyScroller.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="ScrollBar.h" />
-    <ClInclude Include="SearchScene.h" />
+    <ClInclude Include="Table.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

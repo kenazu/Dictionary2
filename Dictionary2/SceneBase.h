@@ -9,8 +9,8 @@
 
 namespace GameInfo
 {
-	//const String FirstScene = U"SearchScene";
-	const String FirstScene = U"Test";
+	const String FirstScene = U"SearchScene";
+	//const String FirstScene = U"Test";
 }
 
 struct GameData
