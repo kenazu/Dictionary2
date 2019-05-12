@@ -7,11 +7,6 @@
 # include "InputWord.h"
 # include "KeyScroller.h"
 
-namespace SceneInfo
-{
-	const String FirstScene = U"SearchScene";
-	//const String FirstScene = U"Test";
-}
 
 struct SceneData
 {
@@ -24,7 +19,7 @@ struct SceneData
 
 		if (sceneIdx < 0)
 		{
-			sceneIdx = sceneNames.size() - 1;
+			sceneIdx = static_cast<int>(sceneNames.size() - 1);
 		}
 		else if (sceneIdx > sceneNames.size() - 1)
 		{
@@ -44,6 +39,7 @@ class Empty :public MyApp::Scene
 {
 	void updateFadeIn(double)override
 	{
+		getData().changeIdx(1);
 		changeScene(getData().getSceneName(), 0);
 	}
 
@@ -116,7 +112,6 @@ public:
 	{
 		scroller.update();
 		count += scroller.getKeyMove();
-
 	}
 
 	void draw()const override

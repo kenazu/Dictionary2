@@ -23,7 +23,7 @@ class SearchScene :public ScrollScene
 	{
 		m_initIdx = 0;
 		m_searchResult = _result;
-		m_scrollBar.setRangeEnd(m_searchResult.size() - 1);
+		m_scrollBar.setRangeEnd(static_cast<int>(m_searchResult.size() - 1));
 		m_scrollBar.setValue(m_initIdx);
 	}
 
@@ -40,6 +40,8 @@ class SearchScene :public ScrollScene
 
 	void scrollTable()
 	{
+		m_scrollBar.update();
+
 		const int move = m_keyScroller.getKeyMove() + static_cast<int>(Mouse::Wheel());
 
 		//キー入力があるときは開始インデックスの値を入力分増減する
@@ -47,13 +49,13 @@ class SearchScene :public ScrollScene
 		if (move != 0)
 		{
 			m_initIdx += move;
-			m_initIdx = Clamp<int>(m_initIdx, 0, m_searchResult.size() - 1);
+			m_initIdx = Clamp<int>(m_initIdx, 0, static_cast<int>(m_searchResult.size() - 1));
 			m_scrollBar.setValue(m_initIdx);
 		}
 		//キー入力がないときは開始インデックスの値をスクロールバーの位置にする
 		else
 		{
-			m_initIdx = Clamp<int>(m_scrollBar.getValue(), 0, m_searchResult.size() - 1);
+			m_initIdx = Clamp<int>(m_scrollBar.getValue(), 0, static_cast<int>(m_searchResult.size() - 1));
 		}
 	}
 
@@ -95,8 +97,7 @@ public:
 	{
 		m_keyScroller.update();
 		m_inputWord.update();
-		m_scrollBar.update();
-
+		
 		scrollTable();
 
 
